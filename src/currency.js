@@ -277,8 +277,8 @@ var Currency = function()
    {
       try
       {
-         locale = Intl.getCanonicalLocales( locale )[ 0 ].split( "-" )[ 1 ] ||
-                  Intl.getCanonicalLocales( navigator.language )[ 0 ].split( "-" )[ 1 ];
+         locale = Intl.getCanonicalLocales( locale )[ 0 ].split( "-" ).reverse()[ 0 ] ||
+                  Intl.getCanonicalLocales( navigator.language )[ 0 ].split( "-" ).reverse()[ 0 ];
       }
       catch( err )
       {
