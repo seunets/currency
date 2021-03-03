@@ -275,16 +275,24 @@ var Currency = function()
    },
    getCurrencyFromLocale = function( locale )
    {
+      let cLocale;
       try
       {
-         locale = Intl.getCanonicalLocales( locale )[ 0 ].split( "-" ).slice( -1 ).pop() ||
-                  Intl.getCanonicalLocales( navigator.language )[ 0 ].split( "-" ).slice( -1 ).pop();
+         cLocale = Intl.getCanonicalLocales( locale )[ 0 ];
       }
       catch( err )
       {
-         locale = "US";
+         try
+         {
+            cLocale = Intl.getCanonicalLocales( navigator.language )[ 0 ];
+         }
+         catch( err )
+         {
+            cLocale = "en-US";
+         }
       }
-   
+      locale = cLocale.substr( cLocale.lastIndexOf( "-" ) - 1 );
+
       return currencies[ locale ] || "USD";
    },
    getParts = function()
